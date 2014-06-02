@@ -23,7 +23,8 @@ Groovy (I wanted to show that Haskell is fit for such tasks).
 
 # Building
 ## Dependencies
-- Cabal 1.20 (for sandboxes)
+- Cabal 1.20 for sandboxes
+- Haddock for documentation
 
 ## Running a Build
 There is a makefile that runs all cabal build steps in one go. Simply run

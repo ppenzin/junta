@@ -22,7 +22,7 @@ data-files:
 
 Library
   hs-source-dirs:      src/lib
-  exposed-modules:     Junta, Junta.Workflow.Phase
+  exposed-modules:     Junta, Junta.Workflow
   build-depends:       base
 
 Executable junta
