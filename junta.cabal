@@ -1,0 +1,38 @@
+name:                junta
+
+-- A reminder about package versioning policy that Cabal (sometimes) follows
+-- http://www.haskell.org/haskellwiki/Package_versioning_policy
+-- PVP summary:      +-+------- breaking API changes
+--                   | | +----- non-breaking API additions
+--                   | | | +--- code changes with no API change
+version:             0.0.0.1
+
+synopsis:            Build automation tool
+description:         A build tool based on conventions and standard workflows
+homepage:            http://github.com/ppenzin/junta/
+license:             BSD3
+license-file:        LICENSE
+author:              Petr Penzin
+maintainer:          penzin-dev@gmail.com
+-- copyright:           
+category:            Build
+build-type:          Simple
+cabal-version:       >=1.8
+data-files:          
+
+Library
+  hs-source-dirs:      src/lib
+  exposed-modules:     Junta, Junta.Workflow.Phase
+  build-depends:       base
+
+Executable junta
+  hs-source-dirs:      src/app
+  main-is:             Main.hs
+  other-modules:       
+  build-depends:       base, yaml, bytestring
+  
+Test-suite test-all
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             TestAll.hs
+  build-depends:       base, tasty, tasty-hunit, tasty-smallcheck
