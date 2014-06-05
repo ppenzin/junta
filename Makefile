@@ -1,36 +1,42 @@
-SANDBOX=cabal sandbox init
-DEPS=cabal install --enable-tests --only-dependencies
-CONFIGURE=cabal configure --enable-tests
-BUILD=cabal build
-TEST=cabal test
-DOC=cabal haddock --executables --tests
-CLEAN=cabal clean
+# Cabal commands
+SANDBOX=sandbox init
+DEPS=install --enable-tests --only-dependencies
+CONFIGURE=configure --enable-tests
+BUILD=build
+TEST=test
+DOC=haddock --executables --tests
+INSTALL=install
+CLEAN=clean
+#Manually cleaning up
 CLOBBER=rm -rf .cabal-sandbox cabal.sandbox.config
 
 all: package
 
+install: package
+	cabal $(INSTALL)
+
 package: test doc
 
 doc:
-	$(DOC)
+	cabal $(DOC)
 
 test: build
-	$(TEST)
+	cabal $(TEST)
 
 build: configure
-	$(BUILD)
+	cabal $(BUILD)
 
 configure: deps
-	$(CONFIGURE)
+	cabal $(CONFIGURE)
 
 deps: .cabal-sandbox
-	$(DEPS)
+	cabal $(DEPS)
 
 .cabal-sandbox: 
-	$(SANDBOX)
+	cabal $(SANDBOX)
 
 clean:
-	$(CLEAN)
+	cabal $(CLEAN)
 
 clobber: clean
 	$(CLOBBER)

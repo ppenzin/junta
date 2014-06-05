@@ -21,12 +21,12 @@ cabal-version:       >=1.8
 data-files:          
 
 Library
-  hs-source-dirs:      src/lib
-  exposed-modules:     Junta, Junta.Workflow
+  hs-source-dirs:      src
+  exposed-modules:     Junta.Workflow
   build-depends:       base
 
 Executable junta
-  hs-source-dirs:      src/app
+  hs-source-dirs:      src
   main-is:             Main.hs
   other-modules:       
   build-depends:       base, yaml, bytestring
