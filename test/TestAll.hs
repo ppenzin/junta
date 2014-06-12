@@ -36,7 +36,11 @@ qcProps = testGroup "(checked by QuickCheck)"
 -}
 
 unitTests = testGroup "Unit tests"
-  [ testCase "List comparison (different length)" $
+  [ testCase "Run Junta without constrfile" $
+      
+  ,
+
+    testCase "List comparison (different length)" $
       [1, 2, 3] `compare` [1,2] @?= GT
 
   , testCase "List comparison (same length)" $

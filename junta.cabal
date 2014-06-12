@@ -29,7 +29,7 @@ Executable junta
   hs-source-dirs:      src
   main-is:             Main.hs
   other-modules:       
-  build-depends:       base, yaml, bytestring
+  build-depends:       base, yaml, bytestring, plugins
   
 Test-suite test-all
   type:                exitcode-stdio-1.0

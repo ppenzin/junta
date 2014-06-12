@@ -9,7 +9,7 @@ import Junta.App.Models.Juntafile
 
 main :: IO ()
 main = do
-         ymlData <- BS.readFile "Juntafile.yml"
+         ymlData <- BS.readFile "constrfile.yml"
          let juntafile = Data.Yaml.decode ymlData :: Maybe Juntafile
          print $ fromJust juntafile
 {-
