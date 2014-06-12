@@ -14,7 +14,10 @@ builds. It is intended to be an alternative to Cabal  (hence the name).
 ## Motivation 
 Cabal build process is kludgy:
 http://zeuk-zeuk.blogspot.com/2014/05/haskell-build-automation-cabal.html#more
-and I think a Haskell build tool needs to strive for the same robustness that
+and there is not much alternatives to it:
+http://zeuk-zeuk.blogspot.com/2014/06/haskell-build-automation-alternatives.html
+
+I think a Haskell build tool needs to strive for the same robustness that
 Apache Maven provides.
 
 Writing a Haskell/Cabal plugin for Maven or Gradle could be an option, but it
@@ -25,6 +28,7 @@ Groovy (I wanted to show that Haskell is fit for such tasks).
 ## Dependencies
 - Cabal 1.20 for sandboxes
 - Haddock for documentation
+- Libraries are listed in the cabal file
 
 ## Running a Build
 There is a makefile that runs all cabal build steps in one go. Simply run
