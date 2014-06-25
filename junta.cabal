@@ -35,4 +35,4 @@ Test-suite test-all
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             TestAll.hs
-  build-depends:       base, tasty, tasty-hunit, tasty-smallcheck
+  build-depends:       base, tasty, tasty-hunit, tasty-smallcheck, tasty-quickcheck
