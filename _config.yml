@@ -1,3 +1,14 @@
-name: Your New Jekyll Site
-markdown: redcarpet
+name: Junta
+baseurl: ""
+url: "http://ppenzin.github.io/junta"
+markdown: kramdown
 pygments: true
+
+# This is a project site, so we need to set some info about the owner
+parent:
+  name: Petr Penzin
+  github:
+    user: ppenzin
+    repo: junta
+  site: ppenzin.github.io
+
