@@ -1,8 +1,25 @@
-name: Junta
-baseurl: ""
-url: "http://ppenzin.github.io/junta"
+# Site settings
+title: Junta
+email: 
+description: "Junta, a build automation tool."
+baseurl: "/junta"
+url: "http://ppenzin.github.io"
+
+# Build settings
 markdown: kramdown
-pygments: true
+permalink: pretty
+
+# Set comment provider to 'disqus' or 'facebook' to enable one of those systems
+# otherwise comments are disabled. See post template for details.
+comments :
+  provider : disqus
+  disqus :
+    shortname: ppenzingithubio
+  facebook :
+    appid : 666308690117034
+    num_posts: 5
+    width: 580
+    colorscheme: light
 
 # This is a project site, so we need to set some info about the owner
 parent:
@@ -11,4 +28,4 @@ parent:
     user: ppenzin
     repo: junta
   site: ppenzin.github.io
-
+  twitter: ppenzin
