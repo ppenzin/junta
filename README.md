@@ -1,4 +1,6 @@
 ppenzin.github.io/junta/
-=================
-Github site for Junta project (https://github.com/ppenzin/junta/). See it at http://ppenzin.github.io/junta/
+=====
 
+Build management tool based on conventions and standard workflows
+
+This branch is the github-pages site for the project. See it here: http://ppenzin.github.io/junta/
