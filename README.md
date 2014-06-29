@@ -13,9 +13,9 @@ builds. It is intended to be an alternative to Cabal  (hence the name).
 
 ## Motivation 
 Cabal build process is kludgy:
-http://zeuk-zeuk.blogspot.com/2014/05/haskell-build-automation-cabal.html#more
+http://ppenzin.github.io/2014/05/26/haskell-build-automation-cabal/
 and there is not much alternatives to it:
-http://zeuk-zeuk.blogspot.com/2014/06/haskell-build-automation-alternatives.html
+http://ppenzin.github.io/2014/06/12/haskell-build-automation-alternatives/
 
 I think a Haskell build tool needs to strive for the same robustness that
 Apache Maven provides.
