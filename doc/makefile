@@ -15,24 +15,20 @@ else
 endif
 endif
 
-TEXLIVE_HOME=/usr/local/texlive/2013/bin/$(ARCH)-$(OS)
-
 # Compile and preveiw settings
 LATEXC=pdflatex
 DOT=dot
 
-FILE=design.pdf
+default: design
 
-default: $(FILE)
-
-%.pdf: src/%.tex
+design: src/design.tex configuration.png
 	$(LATEXC) $^
 
 %.png: src/img/%.dot
 	$(DOT) -o $@ -Tpng $^
 
 clean:
-	rm -f $(FILE)
+	rm -f *.pdf *.png
 
 preview: $(FILE)
 	$(VIEWER) $^ &
