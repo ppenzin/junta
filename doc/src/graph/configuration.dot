@@ -1,0 +1,11 @@
+graph G {
+  subgraph targets {
+    node[shape=record]
+    Phase -- Execution
+    Goal  -- Execution
+    Execution -- Execution
+  }
+  Tool -- Phase
+  Plugin -- Goal
+  Configuration -- Execution
+}

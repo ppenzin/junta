@@ -1,5 +1,0 @@
-digraph G {
-  node [shape=record];
-  Phase -> Execution
-  Goal  -> Execution
-}
