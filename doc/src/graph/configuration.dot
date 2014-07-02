@@ -1,9 +1,11 @@
 graph G {
+  // TODO add one-to-many relationship markings
+  edge [headlabel = "*"]
   subgraph targets {
+    edge [taillabel = "1", headlabel = "n"]
     node[shape=record]
     Phase -- Execution
     Goal  -- Execution
-    Execution -- Execution
   }
   Tool -- Phase
   Plugin -- Goal

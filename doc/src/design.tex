@@ -11,7 +11,17 @@
 
 \maketitle
 
-\section{Configuration}
-\includegraphics{configuration.png}
+\section{Plugin Architecture}
+\subsection{Configuration}
+Three different types of targets:
+\begin{enumerate}
+\item A \textit{phase} is defined by the tool and exposed via API
+\item A \textit{goal} is defined by plugin and registered in the API
+\item An \textit{execution} is defined in the configuration file, links plugin goals with build phases
+\end{enumerate}
+
+High-level overview looks like this:
+
+\includegraphics[height=200px]{configuration.png}
 
 \end{document}
