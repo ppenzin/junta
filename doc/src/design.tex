@@ -11,6 +11,16 @@
 
 \maketitle
 
+\begin{abstract}
+
+\textit{Warning:} At the moment this document is a kitchen sink of everything
+related to Junta's design. 
+
+Hakell historically lacks workflow-based build tools. Junta is an attempt to
+fix that, though it might be able to support other compiled languages as well.
+
+\end{abstract}
+
 \section{Problem Statement}
 Junta is a high-level build automation tool that makes use of build workflows.
 It is intended to be `a layer above' make-like tools. Junta expects a certain
@@ -50,5 +60,16 @@ Three different types of targets:
 \end{enumerate}
 
 \includegraphics[height=200px]{configuration.png}
+
+\section{Build Phases}
+TODO add description of the phases.
+
+\subsection{Implementation mechanism}
+Main assumption: a phase has at most one prerequisite phase. That way we can
+define a phase as being either a special \textit{Initi} phase or being a
+compsite phase that has one prerequisite.
+
+\textit{Init} phase would read the configuration file, register plugins and set
+up links between plugins and executions.
 
 \end{document}
