@@ -11,7 +11,44 @@
 
 \maketitle
 
-\section{Configuration}
-\includegraphics{configuration.png}
+\section{Problem Statement}
+Junta is a high-level build automation tool that makes use of build workflows.
+It is intended to be `a layer above' make-like tools. Junta expects a certain
+project structure for the default workflow and extending the workflow by adding
+plugin or configuration.
+
+The motivation for this project is that at the moment there are no such build
+tool for Haskell, hence all the examples here are concerned with Haskell.
+Approach can be potentially extended to support other compiled lanugages, but
+that is beyond the scope of the current document.
+
+\section{Design Goals}
+
+\paragraph{Simplicity}
+Doing a full build, including testing and documentation using Cabal 1.20
+requires significant amount of manual intervention (various commands in
+particular order) and some tools to be available ourside the build system
+(Haddoc binary, for example). We are looking to break that and allow performing
+a full build with a single command.
+
+Also, the tool is intended to incorporate various build activities, from
+compilation to publishing the artifacts and that would significantly simplify
+development process.
+
+\paragraph{Usability}
+Having ma
+
+\paragraph{Economy}
+
+\section{Plugin Architecture}
+\subsection{Configuration}
+Three different types of targets:
+\begin{enumerate}
+\item A \textit{phase} is defined by the tool and exposed via API
+\item A \textit{goal} is defined by plugin and registered in the API
+\item An \textit{execution} is defined in the configuration file, links plugin goals with build phases
+\end{enumerate}
+
+\includegraphics[height=200px]{configuration.png}
 
 \end{document}

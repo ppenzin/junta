@@ -16,19 +16,19 @@ endif
 endif
 
 # Compile and preveiw settings
-LATEXC=pdflatex
-DOT=dot
+FILE=design.pdf
 
-default: design
+all: $(FILE)
 
-design: src/design.tex configuration.png
-	$(LATEXC) $^
+$(FILE): build_$(FILE)
+	cp build/$(FILE) $@
 
-%.png: src/img/%.dot
-	$(DOT) -o $@ -Tpng $^
+build_$(FILE):
+	cd build && gmake
 
 clean:
-	rm -f *.pdf *.png
+	cd build && gmake clean
+	rm -f $(FILE)
 
 preview: $(FILE)
 	$(VIEWER) $^ &
