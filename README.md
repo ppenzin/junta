@@ -34,5 +34,14 @@ make
 ```
 to build the project. 
 
+For non-Haddock documentation:
+```
+cd doc && make
+```
+on FreeBSD
+```
+cd doc && gmake
+```
+
 [cabal]: http://ppenzin.github.io/2014/05/26/haskell-build-automation-cabal/
 [alt]: http://ppenzin.github.io/2014/06/12/haskell-build-automation-alternatives/
