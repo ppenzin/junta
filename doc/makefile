@@ -4,14 +4,17 @@ ARCH=$(shell uname -m)
 ifeq ($(UNAME), FreeBSD)
         OS=freebsd
 	VIEWER=mupdf
+	MAKE=gmake
 else
 ifeq ($(UNAME), Linux)
         OS=linux
 	VIEWER=evince
+	MAKE=make
 else
         OS=unsupported
 	VIEWER=unsupported
 	ARCH=unsupported
+	MAKE=unsupported
 endif
 endif
 
@@ -24,7 +27,7 @@ $(FILE): build_$(FILE)
 	cp build/$(FILE) $@
 
 build_$(FILE):
-	cd build && gmake
+	cd build && $(MAKE)
 
 clean:
 	cd build && gmake clean
