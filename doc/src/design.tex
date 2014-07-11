@@ -26,23 +26,38 @@ that is beyond the scope of the current document.
 
 \paragraph{Simplicity}
 Doing a full build, including testing and documentation using Cabal 1.20
-requires significant amount of manual intervention (various commands in
-particular order) and some tools to be available ourside the build system
-(Haddoc binary, for example). We are looking to break that and allow performing
-a full build with a single command.
+requires significant number of manual steps (various commands in particular
+order) and some tools to be available ourside the build system (Haddoc binary,
+for example). We are looking to eliminate significant amount of manual
+intervention to the point where a full build can be performed with a single
+command.
 
 Also, the tool is intended to incorporate various build activities, from
 compilation to publishing the artifacts and that would significantly simplify
 development process.
 
 \paragraph{Usability}
-Having ma
+Usability stems from simplicity, reducing the need for manual management makes build system more usable.
 
 \paragraph{Economy}
+Simplifications lead to saving developer's time and therefore resources of the
+roganization she works for.
+
+We are also claiming that our choice of implementation language (Haskell) will
+help us save our resources while developing this project.
+
+\paragraph{Reliability}
+Eliminating unnecessary manual build step would imporve reliability of the
+build, by making it more repeatable. 
 
 \section{Plugin Architecture}
-\subsection{Configuration}
-Three different types of targets:
+Plugin architecture is supposed to make the tool more extensible. There are
+three main `actors' involved in defining a build: \textit{the tool itself}
+which otlines default build process; \textit{configuration file} which is read
+by the tool and which defines plugins and options used for the projects;
+\textit{plugins} that perform build actions.
+
+Links between the three provided by three different types of targets:
 \begin{enumerate}
 \item A \textit{phase} is defined by the tool and exposed via API
 \item A \textit{goal} is defined by plugin and registered in the API
@@ -50,5 +65,7 @@ Three different types of targets:
 \end{enumerate}
 
 \includegraphics[height=200px]{configuration.png}
+
+\subsection{Configuration}
 
 \end{document}
