@@ -6,14 +6,16 @@ import Test.Tasty.HUnit
 import Data.List
 import Data.Ord
 
+import Junta.ConfigReaderTest
+
 main = defaultMain tests
 
 tests :: TestTree
-tests = testGroup "Tests" [properties, unitTests]
+tests = testGroup "Tests" [properties, unitTests, configReaderTests]
 
 properties :: TestTree
-properties = testGroup "Properties" [scProps]
---properties = testGroup "Properties" [scProps, qcProps]
+--properties = testGroup "Properties" [scProps]
+properties = testGroup "Properties" [scProps, qcProps]
 
 scProps = testGroup "(checked by SmallCheck)"
   [ SC.testProperty "sort == sort . reverse" $
