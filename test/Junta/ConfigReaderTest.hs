@@ -12,5 +12,16 @@ configReaderTests = testGroup "Configuration Reader Tests"
       parseConfigFromString happyPathInput @?= happyPathOutput
   ]
 
-happyPathInput = pack "version: \"0.0.1\""
-happyPathOutput = ProjectConfig { version = "0.0.1" }
+-- Happy path test
+happyPathInput = pack (
+    "schemaVersion: \"" ++ aVersion ++ "\"\n" ++
+    "project:\n  name: " ++ aName ++ "\n  version: \"" ++ aVersion ++ "\""
+                      )
+happyPathOutput =
+    ProjectConfig {
+        schemaVersion = aVersion,
+        project = Project { name = aName, version = aVersion }
+                  }
+-- Happy path properties
+aVersion = "0.0.1"
+aName = "aProject"

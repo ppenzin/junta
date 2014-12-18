@@ -1,7 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Junta.Juntafile ( ProjectConfig(..), readConfig, parseConfigFromString ) where
+{-# LANGUAGE TemplateHaskell #-}
+module Junta.Juntafile ( ProjectConfig(..), Project(..), readConfig, parseConfigFromString ) where
 
 import Data.Yaml
+import Data.Aeson.TH
 import Data.Maybe (fromJust)
 import Control.Applicative -- <$>, <*>
 import qualified Data.ByteString.Char8 as BS
@@ -12,13 +14,19 @@ import Junta.Juntafile.Check
   | Contains information needed to build the project.
   | Not necessarily consistent with itself, needs checking.
  -}
-data ProjectConfig = ProjectConfig { version :: String } deriving (Show, Eq)
+data ProjectConfig = ProjectConfig {
+                              schemaVersion :: String,
+                              project :: Project
+                                   } deriving (Show, Eq)
+
+data Project = Project {
+                  name :: String,
+                  version :: String
+                       } deriving (Show, Eq)
 
 -- | Instance of FromJSON to read the configuration from a YAML file/string
-instance FromJSON ProjectConfig where 
-    parseJSON (Object v) = ProjectConfig <$>
-                           v .: "version"
-    parseJSON _ = error "Cannot parse project configuration from YAML"
+$(deriveJSON defaultOptions ''ProjectConfig)
+$(deriveJSON defaultOptions ''Project)
 
 
 {-| Read config from a file
