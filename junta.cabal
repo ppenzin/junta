@@ -29,10 +29,10 @@ Executable junta
   hs-source-dirs:      src/main/haskell
   main-is:             Main.hs
   other-modules:       
-  build-depends:       base, text, aeson, yaml, bytestring
+  build-depends:       base, process, text, aeson, yaml, bytestring
   
 Test-suite test-all
   type:                exitcode-stdio-1.0
   hs-source-dirs:      src/test/haskell, src/main/haskell
   main-is:             TestAll.hs
-  build-depends:       base, text, aeson, yaml, bytestring, tasty, tasty-hunit, tasty-smallcheck, tasty-quickcheck
+  build-depends:       base, process, text, aeson, yaml, bytestring, tasty, tasty-hunit, tasty-smallcheck, tasty-quickcheck
