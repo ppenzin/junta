@@ -1,16 +1,17 @@
 module Main (main) where
 
 import Junta.Juntafile
+import Junta.Action
 import System.Environment
 import System.Process
 import System.Exit
 
 main :: IO ()
 main = readConfig "JuntaOrg.yml"
-       >>= (\config -> getArgs)
-       >>= parseArgs
+       >>= \config -> getArgs
+       >>= \args -> juntaAction config args
        >>  exit
 
-parseArgs _ = putStrLn "TODO, all broken" >> abort
+{----- Helpful functions -----}
 exit = exitWith ExitSuccess
 abort = exitWith $ ExitFailure 8
