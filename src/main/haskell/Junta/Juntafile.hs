@@ -16,7 +16,8 @@ import Junta.Juntafile.Check
  -}
 data ProjectConfig = ProjectConfig {
                               schemaVersion :: String,
-                              project :: Project
+                              project :: Project,
+                              dependencies :: [Project]
                                    } deriving (Show, Eq)
 
 data Project = Project {
