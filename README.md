@@ -22,17 +22,29 @@ would be a comparably large effort and it would have to be done in Java or
 Groovy (I wanted to show that Haskell is fit for such tasks).
 
 # Building
+Tired of resolving the dependencies. This is the minimal (`alpha') version of
+the tool, that is supposed to be only good for building the bigger version. 
+
+The downside of that is that automated tests are now disabled and the tool will
+be tested by building itself.
+
 ## Dependencies
 - Cabal 1.20 for sandboxes
 - Haddock for documentation
 - Libraries are listed in the cabal file
 
 ## Running a Build
-There is a makefile that runs all cabal build steps in one go. Simply run
+First time:
 ```
-make
+cabal sandbox init
+cabal install --only-dependecies
+cabal configure
 ```
-to build the project. 
+Then every time you need a build:
+```
+cabal build
+./test.sh
+```
 
 For non-Haddock documentation:
 ```
