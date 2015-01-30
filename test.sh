@@ -1,1 +1,1 @@
-dist/build/junta/junta compile
+dist/build/junta/jnt compile

@@ -25,7 +25,7 @@ data-files:
 --   exposed-modules:     Junta
 --   build-depends:       base
 
-Executable junta
+Executable jnt
   hs-source-dirs:      src/main/haskell
   main-is:             Main.hs
   other-modules:       
