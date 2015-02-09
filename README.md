@@ -1,5 +1,8 @@
 junta
 ============
+
+[![Build Status](https://travis-ci.org/ppenzin/junta.svg?branch=master)](https://travis-ci.org/ppenzin/junta)
+
 Build management tool based on conventions and standard work flows
 
 # About
