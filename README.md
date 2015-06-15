@@ -40,7 +40,7 @@ be tested by building itself.
 First time:
 ```
 cabal sandbox init
-cabal install --only-dependecies
+cabal install --only-dependencies
 cabal configure
 ```
 Then every time you need a build:
