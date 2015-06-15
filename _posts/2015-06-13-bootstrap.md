@@ -15,7 +15,7 @@ few intermediate versions of the project model for that matter). The first
 feature to be implemented is dependency resolution supporting multiple
 versions; after that test support can be added, then other features.
 
-This incremental approach would allow Junta project to move forward without
+This incremental approach would allow the project to move forward without
 having to implement a significant subset of functionality before any results
 can be demonstrated.
 
