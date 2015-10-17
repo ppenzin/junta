@@ -10,7 +10,7 @@ version:             0.0.0.1
 synopsis:            Build automation tool
 description:         A build tool based on conventions and standard workflows
 homepage:            http://github.com/ppenzin/junta/
-license:             BSD3
+license:             BSD2
 license-file:        LICENSE
 author:              Petr Penzin
 maintainer:          penzin-dev@gmail.com
@@ -29,10 +29,10 @@ Executable jnt
   hs-source-dirs:      src/main/haskell
   main-is:             Main.hs
   other-modules:       
-  build-depends:       base, process, text, aeson, yaml, bytestring
+  build-depends:       base, process, text, yaml-light, bytestring
   
 Test-suite test-all
   type:                exitcode-stdio-1.0
   hs-source-dirs:      src/test/haskell, src/main/haskell
   main-is:             TestAll.hs
-  build-depends:       base, process, text, aeson, yaml, bytestring, tasty, tasty-hunit, tasty-smallcheck, tasty-quickcheck
+  build-depends:       base, process, text, yaml-light, bytestring, tasty, tasty-hunit, tasty-smallcheck, tasty-quickcheck

@@ -18,7 +18,7 @@ import System.Exit
 
 -- | Entry point
 main :: IO ()
-main = readConfig "JuntaOrg.yml"
+main = readConfigFile "JuntaOrg.yml"
        >>= \config -> getArgs
        >>= \args -> juntaAction config args
        >>  exit

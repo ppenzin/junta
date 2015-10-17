@@ -18,13 +18,10 @@ module Junta.Juntafile (
     Project(..),
     -- * Functions
     -- ** Read configuration from file
-    readConfig,
-    -- ** Read configuration from string
-    parseConfigFromString
+    readConfigFile,
 ) where
 
-import Data.Yaml
-import Data.Aeson.TH
+import Data.Yaml.YamlLight
 import Data.Maybe (fromJust)
 import Control.Applicative -- <$>, <*>
 import qualified Data.ByteString.Char8 as BS
@@ -46,22 +43,34 @@ data Project = Project {
                   version :: String
                        } deriving (Show, Eq)
 
--- | Instance of FromJSON to read the configuration from a YAML string
-$(deriveJSON defaultOptions ''ProjectConfig)
--- | Instance of FromJSON to read the project properties from a YAML string
-$(deriveJSON defaultOptions ''Project)
-
-
 {-| Read config from a file
     Takes filename as an argument, returns a ProjectConfig or thorws an error
  -}
-readConfig :: String -> IO ProjectConfig
-readConfig path = BS.readFile path
-         >>= (\ymlData -> return $ parseConfigFromString ymlData)
+readConfigFile :: String -> IO ProjectConfig
+readConfigFile path = BS.readFile path
+         >>= \rawYaml -> parseYamlBytes rawYaml 
+         >>= \liteYaml -> return (parseConfig liteYaml)
 
-{-| Parse project config from a string
-  | Takes a UTF-8 string as an input. Throws an error if the string cannot be
-  | parsed or there are any issues with the read configuration.
+{-| Parse project config from a preprocessed YamlLight object
+  | Takes a YamlLight structure as an input. Throws an error if it
+  | cannot be parsed or there are any issues with the read configuration.
  -}
-parseConfigFromString :: BS.ByteString -> ProjectConfig
-parseConfigFromString input = checkConfig $ fromJust $ (Data.Yaml.decode input :: Maybe ProjectConfig)
+parseConfig :: YamlLight -> ProjectConfig
+parseConfig input = ProjectConfig { schemaVersion = s, project = p, dependencies = d}
+                    where s = getFieldAsString "schemaVersion" input
+                          p = parseProject $ getField "project" input
+                          d = map parseProject (getFieldAsSeq "dependencies" input)
+
+parseProject :: YamlLight -> Project
+parseProject input = Project {name = n, version = v}
+                     where n = getFieldAsString "name" input
+                           v = getFieldAsString "version" input
+
+getFieldAsString :: BS.ByteString -> YamlLight -> String
+getFieldAsString fieldName yml = BS.unpack $ fromJust $ unStr $ getField fieldName yml
+
+getFieldAsSeq :: BS.ByteString -> YamlLight -> [YamlLight]
+getFieldAsSeq fieldName yml = fromJust $ unSeq $ getField fieldName yml
+
+getField :: BS.ByteString -> YamlLight -> YamlLight
+getField fieldName yml = fromJust $ lookupYL (YStr fieldName) yml
