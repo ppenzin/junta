@@ -5,6 +5,9 @@ junta
 
 Build management tool based on conventions and standard work flows
 
+This is an attempt to refresh the project a bit, in some sense starting over.
+Build workflow should be re-imagined in terms of plugins and IO.
+
 # About
 ## TL-DR
 Build tool, based on the idea of conventions and standard work flows (that Maven

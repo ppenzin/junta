@@ -10,21 +10,8 @@ Application's entry point
 -}
 module Main (main) where
 
-import Junta.Juntafile
-import Junta.Action
-import System.Environment
-import System.Process
-import System.Exit
+import Junta.Core
 
 -- | Entry point
 main :: IO ()
-main = readConfigFile "JuntaOrg.yml"
-       >>= \config -> getArgs
-       >>= \args -> juntaAction config args
-       >>  exit
-
-{- * Helpful functions -}
--- ** Sucessfully terminate
-exit = exitWith ExitSuccess
--- ** Terminate with `bad' exit status
-abort = exitWith $ ExitFailure 8
+main = putStrLn "Not implemented yet"
