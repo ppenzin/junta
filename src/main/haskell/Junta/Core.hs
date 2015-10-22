@@ -12,6 +12,19 @@ Every build action is, by nature, IO operation. Will use exception to abort exec
 -}
 module Junta.Core where
 
+import Control.Exception
+import Data.Typeable
+
+-- | Exception type
+data BuildException = BuildException { message :: String {- ^ decriptive error message -}}
+    deriving (Show, Typeable)
+
+instance Exception BuildException
+
+-- | Check if we got a build exception TODO do we need this here
+isBuildException :: (Exception a) => a -> Bool
+isBuildException ex = typeOf ex == typeOf (BuildException "Foo")
+
 -- | A plugin, external part of the system that can do work and emit error messages
 newtype Plugin = Plugin { pluginGoals :: [Goal] }
 
@@ -34,3 +47,7 @@ runBuild = undefined
 -- | Execute a single phase
 runPhase :: Phase -> IO ()
 runPhase = undefined
+
+-- | Run a goal
+runGoal :: Goal -> IO ()
+runGoal g = handle (\ex -> throw (BuildException $ show (ex :: SomeException))) $ action g
