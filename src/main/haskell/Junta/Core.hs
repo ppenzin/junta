@@ -10,6 +10,8 @@ Core abstractions: plugins, goals, phases. For now without mapping to user-acces
 Every build action is, by nature, IO operation. Will use exception to abort execution.
 
 -}
+{-# LANGUAGE DeriveDataTypeable #-}
+
 module Junta.Core where
 
 import Control.Exception
