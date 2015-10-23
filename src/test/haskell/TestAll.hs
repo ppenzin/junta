@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 import Prelude hiding (catch)
 import System.IO.Error hiding (catch)
 import Test.Tasty
