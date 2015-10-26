@@ -20,12 +20,16 @@ data DummyException = Foo | Bar
 
 instance Exception DummyException
 
-main = defaultMain tests
+main = defaultMain unitTests
 
-tests :: TestTree
-tests = testGroup "Tests" [unitTests]
-
+unitTests :: TestTree
 unitTests = testGroup "Unit tests"
+  [ goalTests
+  , phaseTests
+  ]
+
+goalTests :: TestTree
+goalTests = testGroup "Goal tests"
   [ testGoalFail
   , testGoalPass
   ]
@@ -40,3 +44,11 @@ testGoalPass = testCase "Run goal and pass " $ runGoal (Goal (return ())) `catch
           handleBuildError _ = assertFailure "Unexpected error"
 
 
+phaseTests :: TestTree
+phaseTests = testGroup "Phase tests"
+  [ whenPhaseGoalsPassPhasePassesToo
+  , whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase
+  ]
+
+whenPhaseGoalsPassPhasePassesToo = testCase "Happy path with all phase goals passing" $ assertFailure "Unimplemented"
+whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase = testCase "Fail two goals, expect first failure as result" $ assertFailure "Unimplemented"

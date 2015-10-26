@@ -23,7 +23,8 @@ data BuildException = BuildException { message :: String {- ^ decriptive error m
 
 instance Exception BuildException
 
--- | Check if we got a build exception TODO do we need this here
+-- TODO do we need this here
+-- | Check if we got a build exception
 isBuildException :: (Exception a) => a -> Bool
 isBuildException ex = typeOf ex == typeOf (BuildException "Foo")
 
