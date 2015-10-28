@@ -24,11 +24,6 @@ data BuildException = BuildException { message :: String {- ^ decriptive error m
 
 instance Exception BuildException
 
--- TODO do we need this here
--- | Check if we got a build exception
-isBuildException :: (Exception a) => a -> Bool
-isBuildException ex = typeOf ex == typeOf (BuildException "Foo")
-
 -- | A plugin, external part of the system that can do work and emit error messages
 newtype Plugin = Plugin { pluginGoals :: [Goal] }
 
