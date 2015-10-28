@@ -11,6 +11,7 @@ Every build action is, by nature, IO operation. Will use exception to abort exec
 
 -}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Junta.Core where
 
@@ -49,7 +50,9 @@ runBuild = undefined
 
 -- | Execute a single phase
 runPhase :: Phase -> IO ()
-runPhase = undefined
+runPhase p = (mapM_ runGoal (phaseGoals p))
+                   `catches` [Handler (\ (e :: BuildException) -> throw e                                              ),
+                              Handler (\ (e :: BuildException) -> throw (BuildException $ "Internal error: " ++ show e))]
 
 -- | Run a goal
 runGoal :: Goal -> IO ()

@@ -8,6 +8,7 @@ import Test.Tasty.HUnit
 
 import Control.Exception
 import Data.Typeable
+import Data.Maybe
 
 import Junta.Core
 
@@ -22,33 +23,41 @@ instance Exception DummyException
 
 main = defaultMain unitTests
 
+-- | Helper function to fail on exceptions
+acceptNoError :: SomeException -> Assertion
+acceptNoError e = assertFailure ("Unexpected error: " ++ show e)
+
+-- | Helper function to expect a build error with a particular error message
+expectErrorMessage :: String -> BuildException -> Assertion
+expectErrorMessage msg e = ((message e) @?= msg)
+
+-- | Test root
 unitTests :: TestTree
 unitTests = testGroup "Unit tests"
   [ goalTests
   , phaseTests
   ]
 
+-- | Tests for build goals
 goalTests :: TestTree
 goalTests = testGroup "Goal tests"
   [ testGoalFail
   , testGoalPass
   ]
 
-testGoalFail = testCase "Run goal and fail" $ runGoal (Goal (throw Foo)) `catch` handleBuildError
-    where handleBuildError e
-              | isBuildException e = ((message e) @?= "Foo")
-              | otherwise = assertFailure "Wrong exception type"
+testGoalFail = testCase "Run goal and fail" $ runGoal (Goal (throw Foo)) `catch` (expectErrorMessage "Foo")
+testGoalPass = testCase "Run goal and pass " $ runGoal (Goal (return ())) `catch` acceptNoError
 
-testGoalPass = testCase "Run goal and pass " $ runGoal (Goal (return ())) `catch` handleBuildError
-    where handleBuildError :: SomeException -> Assertion
-          handleBuildError _ = assertFailure "Unexpected error"
-
-
+-- | Tests for build phases
 phaseTests :: TestTree
 phaseTests = testGroup "Phase tests"
   [ whenPhaseGoalsPassPhasePassesToo
   , whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase
   ]
 
-whenPhaseGoalsPassPhasePassesToo = testCase "Happy path with all phase goals passing" $ assertFailure "Unimplemented"
-whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase = testCase "Fail two goals, expect first failure as result" $ assertFailure "Unimplemented"
+whenPhaseGoalsPassPhasePassesToo = testCase "Happy path with all phase goals passing" $ runPhase (Phase [happyGoalA, happyGoalB, happyGoalC]) `catch` acceptNoError
+whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase = testCase "Fail two goals, expect first failure as result" $ runPhase (Phase [happyGoalC, Goal (throw Foo), Goal (throw Bar)]) `catch` expectErrorMessage "Foo"
+
+happyGoalA = Goal (return ())
+happyGoalB = Goal (return ())
+happyGoalC = Goal (return ())
