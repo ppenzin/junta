@@ -36,6 +36,7 @@ unitTests :: TestTree
 unitTests = testGroup "Unit tests"
   [ goalTests
   , phaseTests
+  , buildTests
   ]
 
 -- | Tests for build goals
@@ -61,3 +62,13 @@ whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase = testCase "Fail two goals, expec
 happyGoalA = Goal (return ())
 happyGoalB = Goal (return ())
 happyGoalC = Goal (return ())
+
+-- | Tests for the whole build
+buildTests :: TestTree
+buildTests = testGroup "Build tests"
+  [ whenPhaseFailsBuildFails
+  , whenPhasesSucceedBuildSucceeds
+  ]
+
+whenPhasesSucceedBuildSucceeds = testCase "Happy path with all phases passing" $ runBuild (Build [Phase [happyGoalA, happyGoalB], Phase [happyGoalC]]) `catch` acceptNoError
+whenPhaseFailsBuildFails = testCase "Fail two goals, expect first failure as result" $ runBuild (Build [Phase [happyGoalC], Phase[happyGoalA, Goal (throw Foo), Goal (throw Bar)]]) `catch` expectErrorMessage "Foo"

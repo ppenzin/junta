@@ -41,7 +41,9 @@ newtype Build = Build { buildPhases :: [Phase] }
 
 -- | Execute build TODO add a parameter to stop after particular phase
 runBuild :: Build -> IO ()
-runBuild = undefined
+runBuild b = (mapM_ runPhase (buildPhases b))
+                   `catches` [Handler (\ (e :: BuildException) -> throw e                                              ),
+                              Handler (\ (e :: BuildException) -> throw (BuildException $ "Internal error: " ++ show e))]
 
 -- | Execute a single phase
 runPhase :: Phase -> IO ()
