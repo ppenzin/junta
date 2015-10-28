@@ -46,8 +46,8 @@ goalTests = testGroup "Goal tests"
   , testGoalPass
   ]
 
-testGoalFail = testCase "Run goal and fail" $ runGoal (Goal (throw Foo)) `catch` (expectErrorMessage "Foo")
-testGoalPass = testCase "Run goal and pass " $ runGoal (Goal (return ())) `catch` acceptNoError
+testGoalFail = testCase "Run goal and fail" $ runBuild (Goal (throw Foo)) `catch` (expectErrorMessage "Foo")
+testGoalPass = testCase "Run goal and pass " $ runBuild (Goal (return ())) `catch` acceptNoError
 
 -- | Tests for build phases
 phaseTests :: TestTree
@@ -56,8 +56,8 @@ phaseTests = testGroup "Phase tests"
   , whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase
   ]
 
-whenPhaseGoalsPassPhasePassesToo = testCase "Happy path with all phase goals passing" $ runPhase (Phase [happyGoalA, happyGoalB, happyGoalC]) `catch` acceptNoError
-whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase = testCase "Fail two goals, expect first failure as result" $ runPhase (Phase [happyGoalC, Goal (throw Foo), Goal (throw Bar)]) `catch` expectErrorMessage "Foo"
+whenPhaseGoalsPassPhasePassesToo = testCase "Happy path with all phase goals passing" $ runBuild (Phase [happyGoalA, happyGoalB, happyGoalC]) `catch` acceptNoError
+whenTwoPhaseGoalsFailTheFirstOneBreaksThePhase = testCase "Fail two goals, expect first failure as result" $ runBuild (Phase [happyGoalC, Goal (throw Foo), Goal (throw Bar)]) `catch` expectErrorMessage "Foo"
 
 happyGoalA = Goal (return ())
 happyGoalB = Goal (return ())
