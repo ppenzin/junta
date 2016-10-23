@@ -10,8 +10,9 @@ Application's entry point
 -}
 module Main (main) where
 
-import Junta.Core
+--import Junta.Core
+import Junta.Workflow
 
 -- | Entry point
 main :: IO ()
-main = putStrLn "Not implemented yet"
+main = runBuild Compile

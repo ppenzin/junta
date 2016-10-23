@@ -35,7 +35,7 @@ The downside of that is that automated tests are now disabled and the tool will
 be tested by building itself.
 
 ## Dependencies
-- Cabal 1.20 for sandboxes
+- Cabal 1.20 or newer for sandboxes
 - Haddock for documentation
 - Libraries are listed in the cabal file
 
@@ -49,16 +49,6 @@ cabal configure
 Then every time you need a build:
 ```
 cabal build
-./test.sh
-```
-
-For non-Haddock documentation:
-```
-cd doc && make
-```
-on FreeBSD
-```
-cd doc && gmake
 ```
 
 [cabal]: http://ppenzin.github.io/2014/05/26/haskell-build-automation-cabal/
