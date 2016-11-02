@@ -22,12 +22,19 @@ Workflow should probably be :
 
 -}
 
-module Junta.Workflow where
+module Junta.Workflow (
+                        Phase (..),
+                        readPhase,
+                        printPhase,
+                        defaultWorkflow,
+                        runBuild
+                      ) where
 
 import Junta.BuildContext
 import Junta.Workflow.PreBuild
 import Junta.Workflow.Fetch
 import Junta.Workflow.Compile
+import Junta.Workflow.Test
 
 -- | Build phases
 --   TODO those can be broken down further
@@ -41,6 +48,7 @@ readPhase :: String -> Phase
 readPhase "fetch"   = Fetch
 readPhase "compile" = Compile
 readPhase "test"    = Test
+readPhase _         = error "Unrecognized phase" -- TODO exception
 
 -- | Phase to string
 printPhase :: Phase -> String
@@ -66,4 +74,5 @@ runBuild targetPhase = preBuild >>= \c -> executePhases c ps
 executePhases :: BuildContext -> [Phase] -> IO ()
 executePhases c (Fetch:ps) = doFetch c >>= \c' -> executePhases c' ps
 executePhases c (Compile:ps) = doCompile c >>= \c' -> executePhases c' ps
+executePhases c (Test:ps) = doTest c >>= \c' -> executePhases c' ps
 executePhases _ [] = return ()
