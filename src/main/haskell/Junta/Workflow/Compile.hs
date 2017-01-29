@@ -15,4 +15,5 @@ import Junta.BuildContext
 
 -- | Perform Compile action
 doCompile :: BuildContext -> IO BuildContext
-doCompile c = print (projectName c) >> print "in Compile" >> return c -- TODO
+doCompile c = print "TODO Compile" >> print c >> return c -- TODO
+

@@ -29,10 +29,17 @@ Executable jnt
   hs-source-dirs:      src/main/haskell
   main-is:             Main.hs
   other-modules:       
-  build-depends:       base, process, text, yaml-light, bytestring
+  build-depends:       base, containers, process, text, yaml-light, yaml-light-lens, lens, bytestring
   
 Test-suite test-all
   type:                exitcode-stdio-1.0
   hs-source-dirs:      src/test/haskell, src/main/haskell
   main-is:             TestAll.hs
   build-depends:       base, process, text, yaml-light, bytestring, tasty, tasty-hunit, tasty-smallcheck, tasty-quickcheck
+
+Test-suite test-build-config
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      src/test/haskell, src/main/haskell
+  main-is:             Junta/TestBuildConfiguration.hs
+  build-depends:       base, containers, process, text, yaml-light, yaml-light-lens, lens, bytestring, tasty, tasty-hunit, tasty-smallcheck
+

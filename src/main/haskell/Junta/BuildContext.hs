@@ -11,8 +11,11 @@ Build context data type
 
 module Junta.BuildContext where
 
+import Junta.ProjectConfiguration
 
 -- | Build context
 --   TODO add dependencies and other information
-data BuildContext = BuildContext { projectName :: String }
-
+data BuildContext = BuildContext { configuration :: ProjectConfiguration
+                                 , compiler :: String 
+                                 , sourceDirectories :: [String]
+                                 } deriving Show

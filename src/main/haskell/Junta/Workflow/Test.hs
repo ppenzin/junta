@@ -15,4 +15,4 @@ import Junta.BuildContext
 
 -- | Perform Test action
 doTest :: BuildContext -> IO BuildContext
-doTest c = print (projectName c) >> print "in Test" >> return c -- TODO
+doTest c = print "TODO Test" >> return c -- TODO

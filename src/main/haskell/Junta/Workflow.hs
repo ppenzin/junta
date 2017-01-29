@@ -32,33 +32,33 @@ module Junta.Workflow (
 
 import Junta.BuildContext
 import Junta.Workflow.PreBuild
-import Junta.Workflow.Fetch
 import Junta.Workflow.Compile
 import Junta.Workflow.Test
+import Junta.Workflow.Install
 
 -- | Build phases
 --   TODO those can be broken down further
-data Phase = Fetch   -- ^ Fetch dependencies recursively
-           | Compile -- ^ Build the project and dependencies
+data Phase = Compile -- ^ Build the project and dependencies
            | Test    -- ^ Run (unit) tests
+           | Install -- ^ Install in local repository
            deriving Eq
 
 -- | Get phase from its string representation
 readPhase :: String -> Phase
-readPhase "fetch"   = Fetch
 readPhase "compile" = Compile
 readPhase "test"    = Test
+readPhase "install" = Install
 readPhase _         = error "Unrecognized phase" -- TODO exception
 
 -- | Phase to string
 printPhase :: Phase -> String
-printPhase Fetch   = "fetch"
 printPhase Compile = "compile"
 printPhase Test    = "test"
+printPhase Install = "install"
 
 -- | Default sequence of phases
 defaultWorkflow :: [Phase]
-defaultWorkflow =  [Fetch, Compile, Test]
+defaultWorkflow =  [Compile, Test,  Install]
 
 -- | Select the part of default workflow that would be executed
 getPhases :: [Phase] -> Phase -> [Phase]
@@ -72,7 +72,7 @@ runBuild targetPhase = preBuild >>= \c -> executePhases c ps
 
 -- | Run phase pipeline
 executePhases :: BuildContext -> [Phase] -> IO ()
-executePhases c (Fetch:ps) = doFetch c >>= \c' -> executePhases c' ps
 executePhases c (Compile:ps) = doCompile c >>= \c' -> executePhases c' ps
 executePhases c (Test:ps) = doTest c >>= \c' -> executePhases c' ps
+executePhases c (Install:ps) = doInstall c >>= \c' -> executePhases c' ps
 executePhases _ [] = return ()
