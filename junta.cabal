@@ -29,7 +29,7 @@ Executable jnt
   hs-source-dirs:      src/main/haskell
   main-is:             Main.hs
   other-modules:       
-  build-depends:       base, containers, process, text, yaml-light, yaml-light-lens, lens, bytestring
+  build-depends:       base>=4, containers, process, text, yaml-light, yaml-light-lens, lens, bytestring, HsSyck>=0.51
   
 Test-suite test-all
   type:                exitcode-stdio-1.0
