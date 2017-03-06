@@ -6,3 +6,5 @@ before_install:
         - cabal install cabal-install
         - ghc --version
         - cabal --version
+
+install: cabal install --only-dependencies --enable-tests --force-reinstalls
