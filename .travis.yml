@@ -1,2 +1,6 @@
 language: haskell
 ghc: "7.8"
+install:
+  - echo "Override default Travis install step to avoid unnecessary 'cabal install'."
+script:
+  - make

@@ -14,7 +14,6 @@ import System.Environment
 import System.Exit
 
 --import Junta.Core
-import Junta.Workflow
 
 -- | Entry point
 main :: IO ()
@@ -28,10 +27,10 @@ parse ps = runMain ps
 -- | Execute build (separates entry point logistics)
 runMain :: [String] -> IO ()
 runMain []     = return ()
-runMain (p:ps) = runBuild (readPhase p) >> runMain ps
+runMain (p:ps) = putStrLn p >> runMain ps
 
 -- | Pring usage
 printUsage :: IO ()
-printUsage = putStrLn "Usage: jnt [phase]"
+printUsage = putStrLn "Usage: junta [phase]"
 
 exit = exitWith ExitSuccess
